@@ -452,9 +452,6 @@
         <li>Informe o preço do litro em <em>Ajustes</em> para acompanhar quanto isso vale em dinheiro.</li>
         <li>No dia 15 e no último dia do mês a quinzena fecha; use <em>Copiar relatório</em> para mandar no WhatsApp.</li>
       </ol>
-      <div class="tools">
-        <button id="demoBtn2">Ver funcionando com dados de exemplo</button>
-      </div>
     </div>
   </section>
 
@@ -604,7 +601,6 @@
         <button id="importBtn">Restaurar backup</button>
         <button id="exportCsv">Exportar para Excel (CSV)</button>
         <input type="file" id="importFile" accept="application/json,.json" hidden />
-        <button id="demoBtn" class="btn-ghost">Carregar exemplo</button>
         <button id="wipeBtn">Apagar tudo</button>
       </div>
       <p style="font-size:13px;color:var(--muted);margin:14px 0 0;max-width:62ch">
@@ -2041,31 +2037,6 @@
     };
     fr.readAsText(file);
   });
-
-  function carregarExemplo() {
-    if (totalGeral()) {
-      perguntar("Carregar 30 dias de exemplo?",
-        "Os dados de exemplo serão somados aos seus lançamentos de verdade.",
-        "Carregar", false, preencherExemplo);
-      return;
-    }
-    preencherExemplo();
-  }
-
-  function preencherExemplo() {
-    var hoje = new Date();
-    for (var i = 29; i >= 0; i--) {
-      var d = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() - i);
-      var base = 620 + Math.sin(i / 4) * 40 + (Math.random() * 50 - 25);
-      db.registros[iso(d)] = { litros: Math.round(base * 10) / 10, vacas: 28, obs: "" };
-    }
-    if (db.config.preco === null) db.config.preco = 2.15;
-    db.config.ultimasVacas = 28;
-    save(); hydrate(); render();
-    msg("Exemplo carregado. Para limpar, use Apagar tudo em Ajustes.", true);
-  }
-  document.getElementById("demoBtn").addEventListener("click", carregarExemplo);
-  document.getElementById("demoBtn2").addEventListener("click", carregarExemplo);
 
   document.getElementById("wipeBtn").addEventListener("click", function () {
     var qtdLeite = totalGeral(), qtdRacao = db.gastos.length;
