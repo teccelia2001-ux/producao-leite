@@ -159,20 +159,6 @@
   .card-head .hint { font-size: 12.5px; color: var(--muted); }
   .card-body { padding: 18px; }
 
-  /* ---------- primeiro uso ---------- */
-
-  .welcome { display: flex; flex-direction: column; gap: 14px; }
-  .welcome p { margin: 0; color: var(--ink-2); max-width: 62ch; }
-  .steps { display: flex; flex-direction: column; gap: 10px; margin: 4px 0; padding: 0; list-style: none; counter-reset: passo; }
-  .steps li { display: flex; gap: 11px; align-items: baseline; font-size: 14.5px; color: var(--ink-2); }
-  .steps li::before {
-    counter-increment: passo; content: counter(passo);
-    font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--accent);
-    background: var(--accent-soft); border-radius: 50%;
-    width: 21px; height: 21px; flex: 0 0 21px;
-    display: inline-flex; align-items: center; justify-content: center;
-  }
-
   /* ---------- lançamento ---------- */
 
   .entry-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 16px; }
@@ -442,18 +428,6 @@
       <button class="btn-ghost" id="todayBtn">hoje</button>
     </div>
   </header>
-
-  <section class="card" id="welcomeCard" hidden>
-    <div class="card-head"><h2>Comece por aqui</h2></div>
-    <div class="card-body welcome">
-      <p>Anote todo dia quantos litros saíram do tanque. O resto o sistema faz sozinho: fecha a conta a cada quinzena e monta o relatório pronto para enviar.</p>
-      <ol class="steps">
-        <li>Lance a produção de hoje no campo abaixo — só a data e os litros são obrigatórios.</li>
-        <li>Informe o preço do litro em <em>Ajustes</em> para acompanhar quanto isso vale em dinheiro.</li>
-        <li>No dia 15 e no último dia do mês a quinzena fecha; use <em>Copiar relatório</em> para mandar no WhatsApp.</li>
-      </ol>
-    </div>
-  </section>
 
   <section class="card focus">
     <div class="card-head">
@@ -1019,7 +993,6 @@
     var s = stats(view);
     var sAnt = stats(shiftPeriod(view, -1));
 
-    document.getElementById("welcomeCard").hidden = totalGeral() > 0;
     document.getElementById("periodTitle").textContent = periodName(view);
     document.getElementById("periodRange").textContent = periodRangeLabel(view);
     document.getElementById("resumoTitle").textContent = periodName(view);
